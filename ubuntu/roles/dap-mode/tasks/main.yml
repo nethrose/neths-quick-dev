@@ -1,0 +1,11 @@
+---
+- name: Install nvim-dap plugin
+  lineinfile:
+    path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
+    line: "use 'mfussenegger/nvim-dap'"
+
+- name: Create nvim-dap configuration
+  template:
+    src: roles/dap-mode/templates/dap.lua.j2
+    dest: /home/{{ ansible_user }}/.config/nvim/lua/dap.lua
+    mode: '0644'
