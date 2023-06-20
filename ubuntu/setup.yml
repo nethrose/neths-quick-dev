@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Update and upgrade all packages
+      apt:
+        upgrade: dist
+        update_cache: yes
+
+    - name: Install common software
+      apt:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - git
+        - curl
+        - wget
+        - unzip
+
+    # More tasks go here...
+...
