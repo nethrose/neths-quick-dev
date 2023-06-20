@@ -56,10 +56,6 @@
       apt:
         name: nodejs
         state: latest
-    - name: Install Firefox
-      apt:
-        name: firefox
-        state: latest
 
     - name: Install Postman
       snap:
@@ -85,13 +81,13 @@
       apt:
         name: xclip
         state: latest
-   
-   - name: Create .tmux.conf
+
+    - name: Create .tmux.conf
       copy:
         content: |
           set -g mouse on
 
-          # List of plugins
+                    # List of plugins
           set -g @plugin 'tmux-plugins/tpm'
           set -g @plugin 'tmux-plugins/tmux-sensible'
           set -g @plugin 'dracula/tmux'
