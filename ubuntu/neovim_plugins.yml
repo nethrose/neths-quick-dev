@@ -28,13 +28,14 @@
         - nvim-dap-go
         - nvim-dap-ui
         - nvim-dap-virtual-text
-        - telescope-dap.nvim
         - popup.nvim
         - plenary.nvim
-        - telescope.nvim
         - nvim-web-devicons
+        - telescope.nvim
+        - telescope-dap.nvim
         - vim-javascript
         - typescript-vim
         - vim-jsx-pretty
         - vim-graphql
         - emmet-vim
+
