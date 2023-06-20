@@ -1,0 +1,5 @@
+---
+- name: Install copilot.vim plugin
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
+    line: "use 'github/copilot.vim'"
