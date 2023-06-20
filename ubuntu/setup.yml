@@ -56,6 +56,10 @@
       apt:
         name: nodejs
         state: latest
+    - name: Install Firefox
+      apt:
+        name: firefox
+        state: latest
 
     - name: Install Postman
       snap:
@@ -81,13 +85,49 @@
       apt:
         name: xclip
         state: latest
+   
+    - name: Create .tmux.conf
+      copy:
+        content: |
+          set -g mouse on
+
+          # List of plugins
+          set -g @plugin 'tmux-plugins/tpm'
+          set -g @plugin 'tmux-plugins/tmux-sensible'
+          set -g @plugin 'dracula/tmux'
+
+          # dracula customizations
+          set -g @dracula-plugins "git weather time"
+          set -g @dracula-show-fahrenheit false
+          set -g @dracula-military-time false
+          set -g @dracula-show-flags true
+
+          run '~/.tmux/plugins/tpm/tpm'
+
+          bind C-c run "tmux save-buffer - | xclip -i -sel clipboard"
+          bind C-v run 'tmux set-buffer "$(xclip -o -sel clipboard)"; tmux paste-buffer'
+        dest: ~/.tmux.conf
+        mode: '0644'
+
+    - name: Install tmux plugins
+      shell: |
+        tmux start-server
+        tmux new-session -d
+        ~/.tmux/pluginsI apologize for the oversight. Indeed, there seems to be an issue with the indentation in the line `- name: Create .tmux.conf`. YAML syntax is sensitive to indentation. The correct indentation should be:
+
+```yaml
+    ...
+    - name: Install xclip
+      apt:
+        name: xclip
+        state: latest
 
     - name: Create .tmux.conf
       copy:
         content: |
           set -g mouse on
 
-                    # List of plugins
+          # List of plugins
           set -g @plugin 'tmux-plugins/tpm'
           set -g @plugin 'tmux-plugins/tmux-sensible'
           set -g @plugin 'dracula/tmux'
