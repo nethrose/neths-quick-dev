@@ -17,5 +17,102 @@
         - wget
         - unzip
 
-    # More tasks go here...
-...
+    - name: Download VS Code Insiders
+      get_url:
+        url: https://update.code.visualstudio.com/latest/linux-deb-x64/insider
+        dest: /tmp/code-insiders.deb
+
+    - name: Install VS Code Insiders
+      apt:
+        deb: /tmp/code-insiders.deb
+
+    - name: Install Neovim
+      apt:
+        name: neovim
+        state: latest
+    - name: Install Python
+      apt:
+        name: python3
+        state: latest
+
+    - name: Install Go
+      apt:
+        name: golang
+        state: latest
+
+    - name: Install Rust
+      shell:
+        cmd: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        creates: ~/.cargo
+
+    - name: Install Node.js
+      shell:
+        cmd: curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
+      args:
+        warn: no
+      become: yes
+
+    - name: Install Node.js
+      apt:
+        name: nodejs
+        state: latest
+    - name: Install Firefox
+      apt:
+        name: firefox
+        state: latest
+
+    - name: Install Postman
+      snap:
+        name: postman
+        classic: yes
+
+    - name: Install Wireshark
+      apt:
+        name: wireshark
+        state: latest
+
+    - name: Install tmux
+      apt:
+        name: tmux
+        state: latest
+
+    - name: Install tmux Plugin Manager
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: ~/.tmux/plugins/tpm
+    
+    - name: Install xclip
+      apt:
+        name: xclip
+        state: latest
+   
+   - name: Create .tmux.conf
+      copy:
+        content: |
+          set -g mouse on
+
+          # List of plugins
+          set -g @plugin 'tmux-plugins/tpm'
+          set -g @plugin 'tmux-plugins/tmux-sensible'
+          set -g @plugin 'dracula/tmux'
+
+          # dracula customizations
+          set -g @dracula-plugins "git weather time"
+          set -g @dracula-show-fahrenheit false
+          set -g @dracula-military-time false
+          set -g @dracula-show-flags true
+
+          run '~/.tmux/plugins/tpm/tpm'
+
+          bind C-c run "tmux save-buffer - | xclip -i -sel clipboard"
+          bind C-v run 'tmux set-buffer "$(xclip -o -sel clipboard)"; tmux paste-buffer'
+        dest: ~/.tmux.conf
+        mode: '0644'
+
+    - name: Install tmux plugins
+      shell: |
+        tmux start-server
+        tmux new-session -d
+        ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+      args:
+        executable: /bin/bash
