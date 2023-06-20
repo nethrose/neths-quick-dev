@@ -1,1 +1,11 @@
+---
+- name: Install nvim-treesitter plugin
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
+    line: "use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}"
 
+- name: Run Treesitter update
+  ansible.builtin.command:
+    cmd: "nvim +TSUpdate +qall"
+  become: no
+  become_user: "{{ ansible_user }}"
