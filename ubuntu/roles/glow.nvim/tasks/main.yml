@@ -1,11 +1,11 @@
 ---
-- name: Install nvim-treesitter plugin
+- name: Install glow.nvim plugin
   ansible.builtin.lineinfile:
     path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
-    line: "use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}"
+    line: "use {'npxbr/glow.nvim', run = ':GlowInstall'}"
 
-- name: Run Treesitter update
+- name: Run GlowInstall command
   ansible.builtin.command:
-    cmd: "nvim +TSUpdate +qall"
+    cmd: "nvim +GlowInstall +qall"
   become: no
   become_user: "{{ ansible_user }}"

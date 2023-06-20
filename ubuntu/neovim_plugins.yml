@@ -1,1 +1,41 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Clone packer.nvim
+      git:
+        repo: 'https://github.com/wbthomason/packer.nvim'
+        dest: '/home/{{ ansible_user }}/.config/nvim/pack/packer/start/packer.nvim'
+    - include_role:
+        name: "{{ item }}"
+      loop:
+        - nvim-treesitter
+        - mason.nvim
+        - nightfox.nvim
+        - copilot.vim
+        - glow.nvim
+        - symbols-outline.nvim
+        - markdown-preview.nvim
+        - telescope-file-browser.nvim
+        - nvim-cmp
+        - cmp-nvim-lsp
+        - cmp-buffer
+        - cmp-path
+        - LuaSnip
+        - cmp_luasnip
+        - nvim-lspconfig
+        - nvim-lsp-installer
+        - nvim-dap
+        - nvim-dap-go
+        - nvim-dap-ui
+        - nvim-dap-virtual-text
+        - popup.nvim
+        - plenary.nvim
+        - nvim-web-devicons
+        - telescope.nvim
+        - telescope-dap.nvim
+        - vim-javascript
+        - typescript-vim
+        - vim-jsx-pretty
+        - vim-graphql
+        - emmet-vim
 

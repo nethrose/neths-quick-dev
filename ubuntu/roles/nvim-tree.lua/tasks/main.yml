@@ -1,0 +1,5 @@
+---
+- name: Install nvim-tree.lua plugin
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
+    line: "use 'kyazdani42/nvim-tree.lua'"

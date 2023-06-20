@@ -39,7 +39,11 @@
       apt:
         name: golang
         state: latest
-
+    - name: Install delve
+      shell:
+        cmd: go get github.com/go-delve/delve/cmd/dlv
+        chdir: /home/myuser
+    
     - name: Install Rust
       shell:
         cmd: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -148,3 +152,13 @@
         ~/.tmux/plugins/tpm/scripts/install_plugins.sh
       args:
         executable: /bin/bash
+...
+    - name: Update and upgrade apt packages
+      become: yes
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Run install_neovim_plugins.sh
+      script: install_neovim_plugins.sh

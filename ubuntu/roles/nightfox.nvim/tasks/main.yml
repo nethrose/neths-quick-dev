@@ -1,0 +1,5 @@
+---
+- name: Install nightfox.nvim plugin
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
+    line: "use 'EdenEast/nightfox.nvim'"

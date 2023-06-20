@@ -1,0 +1,5 @@
+---
+- name: Install vim-fugitive plugin
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
+    line: "use 'tpope/vim-fugitive'"
