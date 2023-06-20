@@ -1,0 +1,5 @@
+---
+- name: Install nvim-lspconfig plugin
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
+    line: "use 'neovim/nvim-lspconfig'"
