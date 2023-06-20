@@ -1,0 +1,5 @@
+---
+- name: Install which-key.nvim plugin
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
+    line: "use 'folke/which-key.nvim'"
