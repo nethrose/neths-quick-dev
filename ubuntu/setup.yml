@@ -56,10 +56,6 @@
       apt:
         name: nodejs
         state: latest
-    - name: Install Firefox
-      apt:
-        name: firefox
-        state: latest
 
     - name: Install Postman
       snap:
