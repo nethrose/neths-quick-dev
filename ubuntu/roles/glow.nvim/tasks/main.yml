@@ -1,0 +1,11 @@
+---
+- name: Install glow.nvim plugin
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.config/nvim/lua/plugins.lua
+    line: "use {'npxbr/glow.nvim', run = ':GlowInstall'}"
+
+- name: Run GlowInstall command
+  ansible.builtin.command:
+    cmd: "nvim +GlowInstall +qall"
+  become: no
+  become_user: "{{ ansible_user }}"
